@@ -32,6 +32,7 @@ app = Flask(__name__)
 # Handles CORS (cross-origin resource sharing)
 CORS(app)
 # Initlize Google cloud storage client
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/app/lstmforcast01-817d11f6de14.json"
 client = storage.Client()
 
 # Add response headers to accept all types of  requests
