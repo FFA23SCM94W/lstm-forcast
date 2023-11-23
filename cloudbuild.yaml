@@ -1,0 +1,13 @@
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/lstmforcast01/lstmforcast01', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/lstmforcast01/lstmforcast01']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'lstmforcast01', '--image', 'gcr.io/lstmforcast01/lstmforcast01', '--region', 'us-central1', '--platform', 'managed','--port','80']
+images:
+- gcr.io/lstmforcast01/lstmforcast01
